@@ -17,11 +17,11 @@ class ApiController extends Controller
         foreach ($events as $event) {
             if (!($event instanceof \LINE\LINEBot\Event\MessageEvent) ||
             !($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
-            continue;
-        }
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($event->$getText());
-
-        $bot->replyText($event->getReplyToken(), $event->getText());
+                continue;
+            }
+            
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($event->$getText());        
+            $bot->replyText($event->getReplyToken(), $event->getText());
         }
     }
 }
