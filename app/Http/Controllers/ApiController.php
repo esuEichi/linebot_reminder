@@ -13,10 +13,11 @@ class ApiController extends Controller
     function index(){
         $httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $bot = new LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
-        //$sign = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-        //$events = $bot->parseEventRequest(file_get_contents('php://input'), $sign);
+        $sign = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+        var_dump(file_get_contents('php://input'));
+//        $events = $bot->parseEventRequest(file_get_contents('php://input'), $sign);
 
-        $events = $bot->parseEventRequest(file_get_contents('php://input'));
+//        $events = $bot->parseEventRequest(file_get_contents('php://input'));
         
 
         foreach ($events as $event) {
