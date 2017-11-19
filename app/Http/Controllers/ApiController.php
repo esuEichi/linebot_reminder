@@ -14,7 +14,7 @@ class ApiController extends Controller
         $httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $bot = new LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
         $sign = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-        \Log::debug(var_dump(file_get_contents('php://input')));
+        \Log::debug(file_get_contents('php://input'));
 //        $events = $bot->parseEventRequest(file_get_contents('php://input'), $sign);
 
 //        $events = $bot->parseEventRequest(file_get_contents('php://input'));
