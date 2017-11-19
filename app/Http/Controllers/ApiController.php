@@ -26,9 +26,9 @@ class ApiController extends Controller
             $bot->replyText($event->getReplyToken(), $textMessageBuilder);
 
         }*/
-        $events->$event[0]['replyToken'];
+        $events->event[0]['replyToken'];
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hogehoge");        
-        $bot->replyText($events->$event[0]['replyToken'], $textMessageBuilder);
+        $bot->replyText($events->event[0]['replyToken'], $textMessageBuilder);
         
     }
 }
