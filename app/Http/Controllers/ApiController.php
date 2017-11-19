@@ -19,9 +19,9 @@ class ApiController extends Controller
             !($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
                 continue;
             }
-            
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($event->$getText());        
-            $bot->replyText($event->getReplyToken(), $event->getText());
+
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hogehoge");        
+            $bot->replyText($event->getReplyToken(), $textMessageBuilder);
         }
     }
 }
