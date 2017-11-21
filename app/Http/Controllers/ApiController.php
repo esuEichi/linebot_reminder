@@ -29,8 +29,7 @@ class ApiController extends Controller
 
         }*/
         //$json = mb_convert_encoding($events, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
-        
-        \Log::debug(var_dump($json));
+        //\Log::debug(var_dump($json));
 
         \Log::debug(var_dump($events->replyToken));
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hogehoge");        
