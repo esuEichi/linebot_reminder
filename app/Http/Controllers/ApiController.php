@@ -21,8 +21,9 @@ class ApiController extends Controller
 
         $replyToken = $request['events'][0]['replyToken'];
 
+        \Log::debug("access: "+ getenv('CHANNEL_ACCESS_TOKEN'));
+        \Log::debug("secret: "getenv('CHANNEL_SECRET'));
 
-        \Log::debug($bot);
 //        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hogehoge");        
         //$bot->replyText($events->event[0]['replyToken'], $textMessageBuilder);
         $bot->replyText($replyToken, "hogehoge");
