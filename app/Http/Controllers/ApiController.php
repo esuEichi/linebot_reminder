@@ -31,7 +31,8 @@ class ApiController extends Controller
         \Log::debug(var_dump($events));
         $events->event[0]['replyToken'];
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hogehoge");        
-        $bot->replyText($events->event[0]['replyToken'], $textMessageBuilder);
-        
+        //$bot->replyText($events->event[0]['replyToken'], $textMessageBuilder);
+        $bot->replyText($events->event[0]['replyToken'], "hogehoge");
+
     }
 }
