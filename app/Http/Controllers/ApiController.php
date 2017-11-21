@@ -10,35 +10,22 @@ use \LINE\LINEBot;
 class ApiController extends Controller
 {
     //
-    function index(){
+    function index(Request $request){
         $httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $bot = new LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
-        //$sign = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+
         \Log::debug(file_get_contents('php://input'));
 
-        //$events = json_decode(file_get_contents('php://input'), true);
+        //$events = file_get_contents('php://input');
+        //$replyToken = explode('"',explode('replyToken":"', $events)[1])[0];
 
-        $events = file_get_contents('php://input');
-        $replyToken = explode('"',explode('replyToken":"', $events)[1]);
+        $replyToken = $request->events[0]->replyToken;
 
-        /*
-        foreach ($events as $event) {
-            if (!($event instanceof \LINE\LINEBot\Event\MessageEvent) ||
-            !($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
-                continue;
-            }
-        
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hogehoge");        
-            $bot->replyText($event->getReplyToken(), $textMessageBuilder);
 
-        }*/
-        //$json = mb_convert_encoding($events, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
-        //\Log::debug(var_dump($json));
-
-        \Log::debug($replyToken[0]);
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hogehoge");        
+        \Log::debug($replyToken);
+//        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hogehoge");        
         //$bot->replyText($events->event[0]['replyToken'], $textMessageBuilder);
-        $bot->replyText($replyToken[0], "hogehoge");
+        $bot->replyText($replyToken, "hogehoge");
 
     }
 }
