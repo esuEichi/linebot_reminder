@@ -19,7 +19,7 @@ class ApiController extends Controller
         //$events = file_get_contents('php://input');
         //$replyToken = explode('"',explode('replyToken":"', $events)[1])[0];
 
-        $replyToken = $request->events[0]->replyToken;
+        $replyToken = $request['events'][0]['replyToken'];
 
 
         \Log::debug($replyToken);
