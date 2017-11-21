@@ -14,7 +14,7 @@ class ApiController extends Controller
         $httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $bot = new LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
-        \Log::debug(file_get_contents('php://input'));
+        \Log::debug($request);
 
         //$events = file_get_contents('php://input');
         //$replyToken = explode('"',explode('replyToken":"', $events)[1])[0];
