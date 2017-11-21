@@ -16,7 +16,11 @@ class ApiController extends Controller
         //$sign = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
         \Log::debug(file_get_contents('php://input'));
 
-        $events = json_decode(file_get_contents('php://input'), true);
+        //$events = json_decode(file_get_contents('php://input'), true);
+
+        $events = file_get_contents('php://input');
+        $replyToken = explode('"',explode('replyToken":"', $events)[1]);
+
         /*
         foreach ($events as $event) {
             if (!($event instanceof \LINE\LINEBot\Event\MessageEvent) ||
@@ -31,10 +35,10 @@ class ApiController extends Controller
         //$json = mb_convert_encoding($events, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
         //\Log::debug(var_dump($json));
 
-        \Log::debug(var_dump($events['replyToken']));
+        \Log::debug($replyToken);
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hogehoge");        
         //$bot->replyText($events->event[0]['replyToken'], $textMessageBuilder);
-        $bot->replyText($events->event[0]['replyToken'], "hogehoge");
+        $bot->replyText($replyToken, "hogehoge");
 
     }
 }
