@@ -11,10 +11,10 @@ class ApiController extends Controller
 {
     //
     function index(Request $request){
+
         $httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $bot = new LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
-        \Log::debug("SECRET: ".var_dump(getenv('CHANNEL_SECRET')));
-        \Log::debug($replyToken = $request['events'][0]['replyToken']);
+        \Log::debug("SECRET: ".getenv('CHANNEL_SECRET'));
         
         $replyToken = $request['events'][0]['replyToken'];
         $temp = $bot->replyText($replyToken, "hogehoge");
