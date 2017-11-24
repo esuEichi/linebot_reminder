@@ -21,7 +21,7 @@ class ApiController extends Controller
         \Log::debug($request['events']);
 
         $replyToken = $request['events'][0]['replyToken'];
-        $massage = $request['events'][0]['message']['text'];
+        $message = $request['events'][0]['message']['text'];
         
         $temp = $bot->replyText($replyToken, $message);
 
