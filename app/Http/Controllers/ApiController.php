@@ -17,7 +17,9 @@ class ApiController extends Controller
         \Log::debug($replyToken = $request['events'][0]['replyToken']);
         
         $replyToken = $request['events'][0]['replyToken'];
-        $bot->replyText($replyToken, "hogehoge");
+        $temp = $bot->replyText($replyToken, "hogehoge");
+
+        \Log::debug($temp);
 
     }
 }
