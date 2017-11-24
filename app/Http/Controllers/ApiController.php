@@ -18,10 +18,11 @@ class ApiController extends Controller
         $httpClient = new CurlHTTPClient($access_token);
         $bot = new LINEBot($httpClient, ['channelSecret' => $channel_secret]);
 
-        \Log::debug($request['events']);
-
         $replyToken = $request['events'][0]['replyToken'];
-        $massage = $request['events'][0]['message'];
+        $massage = $request['events'][0]['message']['text'];
+        
+        $temp = $bot->replyText($replyToken, $message);
+
 
     }
 }
