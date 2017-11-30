@@ -27,7 +27,7 @@ class ApiController extends Controller
         $user_id = $request['events'][0]['source']['userId'];
 
         if(strpos($text,'を登録' !== false)){
-            $this -> setTimetable($http_client, $bot, $reply_token, $user_name);
+            $this -> setTimetable($http_client, $bot, $reply_token, $text ,$user_id);
         } 
 
         $message = '「~~~を登録」で「~~~」をリマインドするよ」';
@@ -35,13 +35,14 @@ class ApiController extends Controller
 
     }
 
-    function setTimetable($http_client, $bot, $text, $user_id){
+    function setTimetable($http_client, $bot, $reply_token, $text, $user_id){
         //$bot->replyText($)
         $save_text = explode('を登録',$text)[0];
         DB::table('remind')->insert(
             ['user_id' => $user_id, 'message' => $save_text]
         );
-        
+        $bot->replyText($reply_token, "リマインド登録したよ");
+
     }
 
     function reminedTimetable($http_client, $bot){
