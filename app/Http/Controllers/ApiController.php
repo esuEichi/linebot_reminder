@@ -41,7 +41,8 @@ class ApiController extends Controller
         $arr = ['user_id' => $user_id, 'message' => $save_text];
         \Log::debug($arr);
         
-        DB::table('remind')->insert(
+        remind::insert(
+            $arr
         );
         $bot->replyText($reply_token, "リマインド登録したよ");
 
