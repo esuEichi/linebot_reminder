@@ -26,7 +26,7 @@ class ApiController extends Controller
         
         $user_id = $request['events'][0]['source']['userId'];
 
-        if(strpos($text,'を登録' !== false)){
+        if(strpos($text,'を登録') !== false){
             $this -> setTimetable($http_client, $bot, $reply_token, $text ,$user_id);
         } else {
             $message = '「~~~を登録」で「~~~」をリマインドするよ」';
