@@ -62,6 +62,8 @@ class ApiController extends Controller
 
     function push_message($user_id, $message){
         \Log::debug("push_message");
+        \Log::debug($user_id);
+        \Log::debug($message);
         $access_token = getenv('CHANNEL_ACCESS_TOKEN');
         $channel_secret = getenv('CHANNEL_SECRET');
         $http_client = new CurlHTTPClient($access_token);
@@ -91,6 +93,7 @@ class ApiController extends Controller
         );
         $curl = curl_init();
         curl_setopt_array($curl, $options);
+        \Log::debug($curl);
         curl_exec($curl);
         curl_close($curl);
 
