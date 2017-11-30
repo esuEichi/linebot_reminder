@@ -52,7 +52,7 @@ class ApiController extends Controller
 
 
     function remind(){
-        $remind_data = remind::take(1)->get()->all();
+        $remind_data = remind::take(1)->get()->all()->toArray();
         \Log::debug($remind_data);
         $user_id = $remind_data['user_id'];
         $message = $remind_data['message'];
