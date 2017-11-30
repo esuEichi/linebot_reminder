@@ -14,7 +14,7 @@ class CreateRemind extends Migration
     public function up()
     {
         //
-        Schema::create('remind', function (Blueprint $table) {
+        Schema::create('reminds', function (Blueprint $table) {
             $table->increments('id');
             $table->text('user_id');
             $table->text('message');
@@ -30,5 +30,7 @@ class CreateRemind extends Migration
     public function down()
     {
         //
+        Schema::drop('remind');
+        Schema::drop('reminds');
     }
 }
