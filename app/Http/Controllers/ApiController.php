@@ -45,7 +45,8 @@ class ApiController extends Controller
             $arr
         );
         $bot->replyText($reply_token, "リマインド登録したよ");
-
+        $debug_db = remind::find();
+        \Log::debug($debug_db);
     }
 
     function reminedTimetable($http_client, $bot){

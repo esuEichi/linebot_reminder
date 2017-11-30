@@ -30,6 +30,6 @@ class CreateRemind extends Migration
     public function down()
     {
         //
-        Schema::drop('remind');
+        Schema::drop('reminds');
     }
 }
