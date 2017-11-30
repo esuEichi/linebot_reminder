@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 //require_once __DIR__ . '/vendor/autoload.php';
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot;
+use App\remind;
 
 class ApiController extends Controller
 {
@@ -23,17 +24,24 @@ class ApiController extends Controller
         $reply_token = $request['events'][0]['replyToken'];
         $text = $request['events'][0]['message']['text'];
         
-        if($text === '登録'){
-            $this -> setTimetable($http_client, $bot);
-        } elseif($text === 'リマインド') {
-            $this -> reminedTimetable();
-        }
-        $message = '「登録」で時間割の登録、「リマインド」で登録されている情報が確認できるよ';
+        $user_id = $request['events'][0]['source']['userId'];
+
+        if(strpos($text,'を登録' !== false)){
+            $this -> setTimetable($http_client, $bot, $reply_token, $user_name);
+        } 
+
+        $message = '「~~~を登録」で「~~~」をリマインドするよ」';
         $bot->replyText($reply_token, $message);
+
     }
 
-    function setTimetable($http_client, $bot, $reply_token){
+    function setTimetable($http_client, $bot, $text, $user_id){
         //$bot->replyText($)
+        $save_text = explode('を登録',$text)[0];
+        DB::table('remind')->insert(
+            ['user_id' => $user_id, 'message' => $save_text]
+        );
+        
     }
 
     function reminedTimetable($http_client, $bot){
@@ -41,9 +49,13 @@ class ApiController extends Controller
     }
 
     function update_last_message(){
+        fopen("");
+    }
+
+    function save_remind($user_id, $data){
 
     }
-    
+
     function remind(){
 
         $access_token = getenv('CHANNEL_ACCESS_TOKEN');
