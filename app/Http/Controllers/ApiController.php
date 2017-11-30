@@ -50,10 +50,11 @@ class ApiController extends Controller
         \Log::debug($debug_db);
     }
 
+
     function remind(){
         $remind_data = remind::take(1)->get();
-        $user_id = $remind_data->user_id;
-        $message = $remind_data->message;
+        $user_id = $remind_data['user_id'];
+        $message = $remind_data['message'];
 
         $this->puch_message($user_id, $message);
 
@@ -69,7 +70,6 @@ class ApiController extends Controller
         // ヘッダーの作成
         $headers = array('Content-Type: application/json',
         'Authorization: Bearer ' . $access_token);
-
 
         $body = json_encode(
             array(
