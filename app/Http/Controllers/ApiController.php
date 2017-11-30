@@ -61,6 +61,7 @@ class ApiController extends Controller
     }
 
     function push_message($user_id, $message){
+        \Log::debug("push_message");
         $access_token = getenv('CHANNEL_ACCESS_TOKEN');
         $channel_secret = getenv('CHANNEL_SECRET');
         $http_client = new CurlHTTPClient($access_token);
