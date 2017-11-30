@@ -15,7 +15,6 @@ class CreateRemind extends Migration
     {
         //
         Schema::create('reminds', function (Blueprint $table) {
-            $table->increments('id');
             $table->text('user_id');
             $table->text('message');
 
