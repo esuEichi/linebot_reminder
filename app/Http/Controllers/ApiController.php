@@ -45,7 +45,7 @@ class ApiController extends Controller
             $arr
         );
         $bot->replyText($reply_token, "リマインド登録したよ");
-        $debug_db = remind::find();
+        $debug_db = remind::find(10);
         \Log::debug($debug_db);
     }
 
