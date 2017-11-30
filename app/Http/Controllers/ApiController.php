@@ -75,6 +75,7 @@ class ApiController extends Controller
         // ヘッダーの作成
         $headers = array('Content-Type: application/json',
         'Authorization: Bearer ' . $access_token);
+        \Log::debug($headers);
 
         $body = json_encode(
             array(
@@ -84,6 +85,8 @@ class ApiController extends Controller
                         'type' => 'text', 
                         'text' => $message)
             )); 
+        \Log::debug($body);
+            
 
         // 送り出し用
         $options = array(
@@ -93,6 +96,7 @@ class ApiController extends Controller
             CURLOPT_HTTPHEADER     => $headers,
             CURLOPT_POSTFIELDS     => $body
         );
+        \Log::debug($options);
         $curl = curl_init();
         curl_setopt_array($curl, $options);
         \Log::debug($curl);
