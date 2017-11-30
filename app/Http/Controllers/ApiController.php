@@ -50,31 +50,49 @@ class ApiController extends Controller
         \Log::debug($debug_db);
     }
 
-    function reminedTimetable($http_client, $bot){
-
-    }
-
-    function update_last_message(){
-        fopen("");
-    }
-
-    function save_remind($user_id, $data){
-
-    }
-
     function remind(){
+        $remind_data = remind::take(1)->get();
+        $user_id = $remind_data->user_id;
+        $message = $remind_data->message;
 
+        $this->puch_message($user_id, $message);
+
+    }
+
+    function push_message($user_id, $message){
         $access_token = getenv('CHANNEL_ACCESS_TOKEN');
         $channel_secret = getenv('CHANNEL_SECRET');
-
         $http_client = new CurlHTTPClient($access_token);
         $bot = new LINEBot($http_client, ['channelSecret' => $channel_secret]);
+        $url = 'https://api.line.me/v2/bot/message/push';
 
-        \Log::debug($request['events']);
+        // ヘッダーの作成
+        $headers = array('Content-Type: application/json',
+        'Authorization: Bearer ' . $access_token);
 
-        $reply_token = $request['events'][0]['replyToken'];
-        $text = $request['events'][0]['message']['text'];
-        $bot->replyText($reply_token, "リマインドapiが叩かれました");
+
+        $body = json_encode(
+            array(
+                'to' => $user_id,
+                'messages'=> 
+                    array(
+                        'type' => 'text', 
+                        'text' => $message)
+            )); 
+
+        // 送り出し用
+        $options = array(
+            CURLOPT_URL => $url,
+            CURLOPT_CUSTOMREQUEST  => 'POST',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER     => $headers,
+            CURLOPT_POSTFIELDS     => $body
+        );
+        $curl = curl_init();
+        curl_setopt_array($curl, $options);
+        curl_exec($curl);
+        curl_close($curl);
+
     }
 
 }
