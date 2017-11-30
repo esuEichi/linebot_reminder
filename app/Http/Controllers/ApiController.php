@@ -52,10 +52,10 @@ class ApiController extends Controller
 
 
     function remind(){
-        $remind_data = remind::take(1)->get()->all()->toArray();
+        $remind_data = remind::take(1)->get();
         \Log::debug($remind_data);
-        $user_id = $remind_data['user_id'];
-        $message = $remind_data['message'];
+        $user_id = $remind_data->get('user_id');
+        $message = $remind_data->get('message');
 
         $this->puch_message($user_id, $message);
 
