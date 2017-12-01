@@ -13,8 +13,7 @@ class CreateTimetables extends Migration
      */
     public function up()
     {
-        Schema::create('timetable', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('timetables', function (Blueprint $table) {
             $table->text('user_id');
             $table->text('mon');
             $table->text('tue');
@@ -34,6 +33,6 @@ class CreateTimetables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timetable');
+        Schema::dropIfExists('timetables');
     }
 }
