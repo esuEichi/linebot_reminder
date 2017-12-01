@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot;
 use App\remind;
+use \LINE\LINEBot\MessageBuilder;
 
 class ApiController extends Controller
 {
@@ -72,7 +73,10 @@ class ApiController extends Controller
         $bot = new LINEBot($http_client, ['channelSecret' => $channel_secret]);
         $url = 'https://api.line.me/v2/bot/message/push';
 
-        $bot->pushMessage($user_id, $message);
+        $push_message = new MassageBuilder($message);
+        $push_message->buildMessage();
+
+        $bot->pushMessage($user_id, $push_message);
 /*
         // ヘッダーの作成
         $headers = array('Content-Type: application/json',
