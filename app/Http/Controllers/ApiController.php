@@ -62,7 +62,7 @@ class ApiController extends Controller
         $this->push_message($user_id, $message);
 
     }
-
+    
     function push_message($user_id, $message){
         \Log::debug("push_message");
         \Log::debug($user_id);
