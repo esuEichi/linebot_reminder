@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //require_once __DIR__ . '/vendor/autoload.php';
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
-
+use \LINE\LINEBot\MassageBuilder;
 use \LINE\LINEBot;
 use App\remind;
 
@@ -76,7 +76,7 @@ class ApiController extends Controller
         $bot = new LINEBot($http_client, ['channelSecret' => $channel_secret]);
         $url = 'https://api.line.me/v2/bot/message/push';
 
-        $push_message = new \LINE\LINEBot\MassageBuilder($message);
+        $push_message = new MessageBuilder($message);
         $push_message->buildMessage();
 
         $bot->pushMessage($user_id, $push_message);
