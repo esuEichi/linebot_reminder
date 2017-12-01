@@ -77,7 +77,7 @@ class ApiController extends Controller
         $bot = new LINEBot($http_client, ['channelSecret' => $channel_secret]);
         $url = 'https://api.line.me/v2/bot/message/push';
 
-        $push_message = new MessageBuilder($message);
+        $push_message = new TextMessageBuilder($message);
         $push_message->buildMessage();
 
         $bot->pushMessage($user_id, $push_message);
