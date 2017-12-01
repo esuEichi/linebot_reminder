@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //require_once __DIR__ . '/vendor/autoload.php';
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
-use \LINE\LINEBot\MassageBuilder;
 use \LINE\LINEBot;
+use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+
 use App\remind;
 
 class ApiController extends Controller
