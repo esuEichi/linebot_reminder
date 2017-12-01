@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //require_once __DIR__ . '/vendor/autoload.php';
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
+
 use \LINE\LINEBot;
 use App\remind;
-use \LINE\LINEBot\MessageBuilder;
 
 class ApiController extends Controller
 {
     //    
-    function index(Request $request){
-
+    function index(Request $request)
+    {
         $access_token = getenv('CHANNEL_ACCESS_TOKEN');
         $channel_secret = getenv('CHANNEL_SECRET');
 
@@ -36,7 +36,8 @@ class ApiController extends Controller
 
     }
 
-    function setTimetable($http_client, $bot, $reply_token, $text, $user_id){
+    function setTimetable($http_client, $bot, $reply_token, $text, $user_id)
+    {
         //$bot->replyText($)
         $save_text = explode('を登録',$text)[0];
         $arr = ['user_id' => $user_id, 'message' => $save_text];
@@ -52,7 +53,8 @@ class ApiController extends Controller
     }
 
 
-    function remind(){
+    function remind()
+    {
         $remind_data = remind::take(1)->get();
         \Log::debug($remind_data);
         $user_id = $remind_data[0]['user_id'];
@@ -62,8 +64,9 @@ class ApiController extends Controller
         $this->push_message($user_id, $message);
 
     }
-    
-    function push_message($user_id, $message){
+
+    function push_message($user_id, $message)
+    {
         \Log::debug("push_message");
         \Log::debug($user_id);
         \Log::debug($message);
@@ -73,7 +76,7 @@ class ApiController extends Controller
         $bot = new LINEBot($http_client, ['channelSecret' => $channel_secret]);
         $url = 'https://api.line.me/v2/bot/message/push';
 
-        $push_message = new MassageBuilder($message);
+        $push_message = new \LINE\LINEBot\MassageBuilder($message);
         $push_message->buildMessage();
 
         $bot->pushMessage($user_id, $push_message);
