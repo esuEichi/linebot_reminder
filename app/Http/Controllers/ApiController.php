@@ -72,6 +72,8 @@ class ApiController extends Controller
         $bot = new LINEBot($http_client, ['channelSecret' => $channel_secret]);
         $url = 'https://api.line.me/v2/bot/message/push';
 
+        $bot->pushMessage($user_id, $message);
+/*
         // ヘッダーの作成
         $headers = array('Content-Type: application/json',
         'Authorization: Bearer ' . $access_token);
@@ -102,7 +104,7 @@ class ApiController extends Controller
         \Log::debug($curl);
         curl_exec($curl);
         curl_close($curl);
-
+*/
     }
 
 }
