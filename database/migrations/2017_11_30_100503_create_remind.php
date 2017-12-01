@@ -17,6 +17,7 @@ class CreateRemind extends Migration
         Schema::create('reminds', function (Blueprint $table) {
             $table->text('user_id');
             $table->text('message');
+            $table->timestamps();
 
         });
     }
