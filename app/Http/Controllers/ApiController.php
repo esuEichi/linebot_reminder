@@ -55,6 +55,7 @@ class ApiController extends Controller
         $user_id = $remind_data[0]['user_id'];
         $message = $remind_data[0]['message'];
         
+        //リマインドを実行したらすべての登録された情報を消す（複数ユーザーに対応していない）
         remind::truncate();
 
         $this->push_message($user_id, $message);
